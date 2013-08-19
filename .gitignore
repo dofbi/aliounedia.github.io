@@ -1,4 +1,4 @@
-*.css
-js/libs/*
-*.min.js
-_site/
+#*.css
+#js/libs/*
+#*.min.js
+#_site/
