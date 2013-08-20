@@ -19,21 +19,13 @@ Vimeo.prototype.request = function(){
 	port: 80,
   	}
 	alert(options.url);
-	$.getJSON("http://vimeo.com/api/v2/forwardtechnology/videos.json", function(data) {
-		alert("success");
-		alert('data');
-	})	
-	.done(function(data) {
-		 alert("second success"); 
-		 self.format(data);
-	})
-	.fail(function(xhr, ajaxOptions, thrownError) { 
-		alert('error' + xhr);
-		alert(ajaxOptions);
-		alert(thrownError);
-		 })
-	.always(function() { alert("finished"); });
-	
+	$.ajax({
+            url : 'http://http://vimeo.com/api/v2/forwardtechnology/videos.json',
+    		dataType : 'jsonp',
+		//callback
+    		success : function(data){alert('data' + data )} 
+		
+	});
 }
 //Format  Video
 Vimeo.prototype.format =  function(data){
