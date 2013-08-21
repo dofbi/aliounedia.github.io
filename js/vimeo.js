@@ -78,7 +78,6 @@ forwardtechnology/videos.json",
     ).done(function(data){
         v = new Vimeo()
         v.load(data);
-        alert("test");
         new  VimeosView({model: v.videos});
     }
 )
