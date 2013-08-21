@@ -5,7 +5,7 @@ description: ""
 ---
 {% for post in site.posts limit:5 %}
 <h2><a href ="{{ post.url }}">{{ post.title }}</a></h2>
-{% if post.url == "post" %}
+{% if post.url !="" %}
 <img src ="{{ post.url }}" />
 {% endif %}
 <article>
