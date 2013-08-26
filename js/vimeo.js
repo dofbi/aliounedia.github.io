@@ -20,8 +20,9 @@ Vimeo.prototype.load =  function(data){
         });
     }
     // limit
-    if (data.length >3){
-	this.videos = this.videos[:3]}
+    if (data.length >4){
+	this.videos = this.videos.slice(1,4)
+    }
 		
 }
 /*jshint multistr:true */
