@@ -5,12 +5,13 @@
 Twitter =  function(){
     var self = this ;
     var _url = 'https://api.twitter.com/1/statuses/user_timeline/CypressNorth.json?callback=?&count=1';
+    tweets   = []
 }
 
 // Twitter Parsing URL 
-Twitter.protocole.parse_url = function(){
+Twitter.prototype.parse_url = function(){
     return this.replace(
-	/[A-Za-z]+://[A-Za-z0-9-_]+.[A-Za-z0-9-_:%&~?/.=]+/g, 
+	/*/[A-Za-z]+://[A-Za-z0-9-_]+.[A-Za-z0-9-_:%&~?/.=]+/g*/ /./g, 
         function(url) {
         return url.link(url);
     });
@@ -43,39 +44,43 @@ Twitter.prototype.fetch  = function(){
         for( i =0 ; i <data.length; i++){
             var tweet = data[0].text;
             var tweet_date = self.parseDate(data[0].created_at)
-            return
+            this.tweets.push({ text: text , date : date})
         }
     });
 }
 
 // Single Tweeter View , 
-TwitterView = new BackBone.Model.View(
+TwitterView = Backbone.View.extend({
     initialize :function(){
         //
-    }
-    template : '<div class="tweeter-info"><div class="uppercase bold"> \
-    <a href="https://twitter.com/#!/CypressNorth" target="_blank" class="black"> \
-    @CypressNorth</a></div><div class="right"> \
-    <a href="https://twitter.com/#!/CypressNorth/status/ \
-    '+data[0].id_str+'">'+tweet_date+' </a></div></div> \
-    '
+    },
+    template : '<li> \
+<a href="https://twitter.com/#!/CypressNorth" target="_blank" class="black"> \
+@CypressNorth</a></div><div class="right"> \
+<a href="https://twitter.com/#!/CypressNorth/status/ \
+{{ text }}">{{ date }}</a></li> \
+',
     render : function(){
         return Mustache.render(this.template, self.model);
     }
  	
-}
+})
 // Collections of tweets , render each tweet view
-TwittersView = new BackBone.Model.View(
+TwittersView = Backbone.View.extend({
+    el: ("#twitter ul"),
     initialize :function(){
-        tweets =  new Twitter().fetch()
-    }
+        t =  new Twitter().fetch()
+	  alert('The tweets :' + t.tweets );
+    },
     render : function(){
         _.each( tweets  , function(tweets){
         this.$el.append(new TwitterView({model: tweets}.render()))
         return this
-    }
-}
+   	 })
+   }
+})
 // Setup Tweet 
+
 $(function(){
     new  TwittersView()
 })
