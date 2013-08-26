@@ -21,3 +21,6 @@ modernizrBuild: '' # lives in /js/libs/, don't forget extension
 jqVersion: '1.9.1'
 
 ga: 'UA-' # google analytics site id
+
+paginate_path: "page:num"
+paginate: 2
