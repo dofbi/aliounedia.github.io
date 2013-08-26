@@ -20,7 +20,7 @@ Vimeo.prototype.load =  function(data){
         });
     }
     // limit
-    if data.length >3:
+    if (data.length >3):
 	this.videos = this.videos[:3]
 		
 }
